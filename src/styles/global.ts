@@ -7,9 +7,15 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  :focus {
+    outline: 0;
+    box-shadow: 0 0 0 2px ${(props) => props.theme.purple};
+  }
+
   body {
-    background: #333;
-    color: #fff
+    background: ${(props) => props.theme.background};
+    color: ${(props) => props.theme['base-subtitle']};
+    -webkit-font-smoothing: antialiased;
   }
 
   body, input, textarea, button {
