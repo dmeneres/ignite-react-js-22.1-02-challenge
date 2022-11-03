@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  max-width: 256px;
-  max-height: 310px;
+  width: 256px;
+  height: 310px;
   border-radius: 6px 36px;
   padding-bottom: 20px;
 
@@ -184,4 +184,9 @@ export const IconButton = styled.button`
   border: transparent;
 
   cursor: pointer;
+
+  :hover {
+    background: ${(props) => props.theme.purple};
+    transition: 0.2s;
+  }
 `

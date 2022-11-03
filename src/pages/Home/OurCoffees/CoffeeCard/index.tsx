@@ -1,4 +1,5 @@
 import { Minus, Plus, ShoppingCart } from 'phosphor-react'
+import { useState } from 'react'
 import {
   Actions,
   AddCounter,
@@ -14,30 +15,43 @@ import {
   Tags,
 } from './styles'
 
-export function CoffeeCard() {
+interface CoffeeCardProps {
+  name: string
+  label: string
+  imageUrl: string
+  tags: Array<string>
+}
+
+export function CoffeeCard({ name, label, imageUrl, tags }: CoffeeCardProps) {
+  const [counter, setCounter] = useState<number>(0)
+
   return (
     <Container>
-      <img src="../src/assets/coffee-expresso.svg" alt="lala" />
+      <img src={`../src/assets/${imageUrl}`} alt="" />
       <Tags>
-        <Tag>TRADITIONAL</Tag>
+        {tags.map((tag: string) => (
+          <Tag key={new Date().getTime()}>{tag}</Tag>
+        ))}
       </Tags>
-      <Name>Traditional Expresso</Name>
-      <Description>
-        Traditional coffee made with hot water and grains
-      </Description>
+      <Name>{name}</Name>
+      <Description>{label}</Description>
 
       <Buy>
         <Price>
           <span>€</span>
-          2,00
+          1,99
         </Price>
         <Actions>
           <Counter>
-            <SubtractCounter>
+            <SubtractCounter
+              onClick={() => setCounter((prevState) => prevState - 1)}
+            >
               <Minus size={14} />
             </SubtractCounter>
-            <p>1</p>
-            <AddCounter>
+            <p>{counter >= 0 ? counter : 0}</p>
+            <AddCounter
+              onClick={() => setCounter((prevState) => prevState + 1)}
+            >
               <Plus size={14} />
             </AddCounter>
           </Counter>
