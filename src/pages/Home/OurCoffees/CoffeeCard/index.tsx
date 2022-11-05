@@ -8,6 +8,7 @@ import {
   Counter,
   Description,
   IconButton,
+  ImageCoffee,
   Name,
   Price,
   SubtractCounter,
@@ -27,7 +28,8 @@ export function CoffeeCard({ name, label, imageUrl, tags }: CoffeeCardProps) {
 
   return (
     <Container>
-      <img src={`../src/assets/${imageUrl}`} alt="" />
+      <ImageCoffee src={`../src/assets/${imageUrl}`} />
+      {/* <img src={`../src/assets/${imageUrl}`} alt="" /> */}
       <Tags>
         {tags.map((tag: string) => (
           <Tag key={new Date().getTime()}>{tag}</Tag>

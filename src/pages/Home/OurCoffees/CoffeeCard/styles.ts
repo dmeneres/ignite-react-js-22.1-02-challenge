@@ -8,13 +8,20 @@ export const Container = styled.div`
 
   background-color: ${(props) => props.theme['base-card']};
 
-  display: flex;
-  flex-direction: column;
+  display: block;
+  /* flex-direction: column; */
   justify-content: center;
 
   img {
     height: 120px;
   }
+`
+
+export const ImageCoffee = styled.img`
+  height: 120px;
+  width: 100%;
+  justify-content: center;
+  margin-top: -20px;
 `
 
 export const Tags = styled.div`
@@ -50,6 +57,7 @@ export const Tag = styled.div`
 export const Name = styled.div`
   max-width: 216px;
   margin: auto;
+  height: 26px;
 
   font-family: 'Baloo 2';
   font-style: normal;
@@ -68,6 +76,7 @@ export const Name = styled.div`
 export const Description = styled.div`
   max-width: 216px;
   margin: auto;
+  height: 36px;
 
   font-family: 'Roboto';
   font-style: normal;
@@ -87,8 +96,9 @@ export const Buy = styled.div`
   display: flex;
   flex-direction: row;
   gap: 22px;
+  justify-content: center;
 
-  margin: auto;
+  margin-top: 33px;
 `
 
 export const Price = styled.div`
