@@ -24,7 +24,7 @@ export const Locale = styled.div`
   padding: 8px;
   height: 38px;
   background-color: ${(props) => props.theme['purple-light']};
-  color: ${(props) => props.theme['purple-dark']};
+  color: ${(props) => props.theme.purple};
   justify-content: center;
   border-radius: 6px;
   gap: 4px;
@@ -35,6 +35,7 @@ export const Locale = styled.div`
     font-weight: 400;
     font-size: 0.875rem;
     line-height: 130%;
+    color: ${(props) => props.theme['purple-dark']};
   }
 `
 

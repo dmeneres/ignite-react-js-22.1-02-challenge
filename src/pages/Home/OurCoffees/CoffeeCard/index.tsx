@@ -32,7 +32,7 @@ export function CoffeeCard({ name, label, imageUrl, tags }: CoffeeCardProps) {
       {/* <img src={`../src/assets/${imageUrl}`} alt="" /> */}
       <Tags>
         {tags.map((tag: string) => (
-          <Tag key={new Date().getTime()}>{tag}</Tag>
+          <Tag key={`${imageUrl}--${tag}`}>{tag}</Tag>
         ))}
       </Tags>
       <Name>{name}</Name>
