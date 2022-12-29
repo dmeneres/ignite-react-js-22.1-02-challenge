@@ -3,85 +3,85 @@
     {
       "name": "Traditional Expresso",
       "label": "Traditional coffee made with hot water and grains",
-      "imageUrl": "coffee-expresso.svg",
+      "imageUrl": "coffee-expresso",
       "tags": ["TRADITIONAL"]
     },
     {
       "name": "American Expresso",
       "label": "Diluted expresso, less intense than traditional expresso",
-      "imageUrl": "coffee-american.svg",
+      "imageUrl": "coffee-american",
       "tags": ["TRADITIONAL"]
     },
     {
       "name": "Creamed Expresso",
       "label": "Traditional expresso with cream",
-      "imageUrl": "coffee-creamed-expresso.svg",
+      "imageUrl": "coffee-creamed-expresso",
       "tags": ["TRADITIONAL"]
     },
     {
       "name": "Iced Expresso",
       "label": "Prepared with expresso and ice",
-      "imageUrl": "coffee-iced-expresso.svg",
+      "imageUrl": "coffee-iced-expresso",
       "tags": ["TRADITIONAL", "ICED"]
     },
     {
       "name": "Coffee with Milk",
       "label": "Half expresso, half vaporized milk",
-      "imageUrl": "coffee-milk-with-coffee.svg",
+      "imageUrl": "coffee-milk-with-coffee",
       "tags": ["TRADITIONAL", "WITH MILK"]
     },
     {
       "name": "Latte",
       "label": "One dose of expresso and two of milk and cream",
-      "imageUrl": "coffee-latte.svg",
+      "imageUrl": "coffee-latte",
       "tags": ["TRADITIONAL", "WITH MILK"]
     },
     {
       "name": "Capuccino",
       "label": "Expresso, milk, cream and cinnamon",
-      "imageUrl": "coffee-capuccino.svg",
+      "imageUrl": "coffee-capuccino",
       "tags": ["TRADITIONAL", "WITH MILK"]
     },
     {
       "name": "Macchiato",
       "label": "Expresso with just a little bit of milk and foam",
-      "imageUrl": "coffee-macchiato.svg",
+      "imageUrl": "coffee-macchiato",
       "tags": ["TRADITIONAL", "WITH MILK"]
     },
     {
       "name": "Mocaccino",
       "label": "Expresso with chocolate, milk and foam",
-      "imageUrl": "coffee-mocaccino.svg",
+      "imageUrl": "coffee-mocaccino",
       "tags": ["TRADITIONAL", "WITH MILK"]
     },
     {
       "name": "Hot Chocolate",
       "label": "Chocolate dissolved on hot milk with coffee",
-      "imageUrl": "coffee-hot-chocolate.svg",
+      "imageUrl": "coffee-hot-chocolate",
       "tags": ["SPECIAL", "WITH MILK"]
     },
     {
       "name": "Cuban",
       "label": "Cold beverage with coffee, rum, milk cream and mint",
-      "imageUrl": "coffee-cuban.svg",
+      "imageUrl": "coffee-cuban",
       "tags": ["SPECIAL", "ALCOHOLIC", "ICED"]
     },
     {
       "name": "Hawaiian",
       "label": "Sweet drink prepared with coffee and coconut milk",
-      "imageUrl": "coffee-hawaiian.svg",
+      "imageUrl": "coffee-hawaiian",
       "tags": ["SPECIAL"]
     },
     {
       "name": "Arab",
       "label": "Prepared with arab coffee grains and spices",
-      "imageUrl": "coffee-arab.svg",
+      "imageUrl": "coffee-arab",
       "tags": ["SPECIAL"]
     },
     {
       "name": "Irish",
       "label": "Coffee, irish whiskey, sugar and chantilly",
-      "imageUrl": "coffee-irish.svg",
+      "imageUrl": "coffee-irish",
       "tags": ["SPECIAL", "ALCOHOLIC"]
     }
   ]
