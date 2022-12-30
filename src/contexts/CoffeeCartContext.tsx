@@ -7,7 +7,8 @@ interface Cart {
 
 interface CartContextType {
   handleChangeCart: (coffee: string, quantity: number) => void
-  handleShowCart: (type: 'full' | 'number') => Cart[] | number | undefined
+  handleShowCart: () => Cart[]
+  handleShowNumber: () => number
 }
 
 export const CartContext = createContext({} as CartContextType)
@@ -50,18 +51,18 @@ export function CoffeeCartContext({
     setCart(newCart)
   }
 
-  function handleShowCart(type: 'full' | 'number') {
-    if (type === 'full') {
-      const fullCart: Cart[] = []
-      cart.map((element) =>
-        element.number !== 0 ? fullCart.push(element) : undefined,
-      )
-      return fullCart
-    } else if (type === 'number') {
-      let totalNumber = 0
-      cart.map((element) => (totalNumber += element.number))
-      return Number(totalNumber)
-    }
+  function handleShowCart() {
+    const fullCart: Cart[] = []
+    cart.map((element) =>
+      element.number !== 0 ? fullCart.push(element) : undefined,
+    )
+    return fullCart
+  }
+
+  function handleShowNumber() {
+    let totalNumber = 0
+    cart.map((element) => (totalNumber += element.number))
+    return Number(totalNumber)
   }
 
   return (
@@ -69,6 +70,7 @@ export function CoffeeCartContext({
       value={{
         handleChangeCart,
         handleShowCart,
+        handleShowNumber,
       }}
     >
       {children}
