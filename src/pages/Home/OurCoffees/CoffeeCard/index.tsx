@@ -25,22 +25,12 @@ interface CoffeeCardProps {
 }
 
 export function CoffeeCard({ name, label, imageUrl, tags }: CoffeeCardProps) {
-  // const [counter, setCounter] = useState<number>(0)
   const { handleChangeCoffeeCounter, showCoffeeNumber } =
     useContext(CounterContext)
-
-  // console.log(
-  //   typeof coffeeCounter[
-  //     coffeeCounter.findIndex((coffeeEach) => {
-  //       return coffeeEach.type === imageUrl
-  //     })
-  //   ].number,
-  // )
 
   return (
     <Container>
       <ImageCoffee src={`../src/assets/${imageUrl}.svg`} />
-      {/* <img src={`../src/assets/${imageUrl}`} alt="" /> */}
       <Tags>
         {tags.map((tag: string) => (
           <Tag key={`${imageUrl}--${tag}`}>{tag}</Tag>

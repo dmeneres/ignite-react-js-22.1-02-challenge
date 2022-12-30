@@ -4,14 +4,17 @@ import { Router } from './Router'
 import { GlobalStyle } from './styles/global'
 import { defaultTheme } from './styles/themes/default'
 import { CoffeeCounterContextProvider } from './contexts/CoffeeCounterContext'
+import { CoffeeCartContext } from './contexts/CoffeeCartContext'
 
 function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <BrowserRouter>
-        <CoffeeCounterContextProvider>
-          <Router />
-        </CoffeeCounterContextProvider>
+        <CoffeeCartContext>
+          <CoffeeCounterContextProvider>
+            <Router />
+          </CoffeeCounterContextProvider>
+        </CoffeeCartContext>
       </BrowserRouter>
       <GlobalStyle />
     </ThemeProvider>

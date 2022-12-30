@@ -24,14 +24,21 @@ import {
 import traditionalExpresso from '../../assets/coffee-expresso.svg'
 import latte from '../../assets/coffee-latte.svg'
 import { useState } from 'react'
+import { useForm } from 'react-hook-form'
 
 // const coffeeList = coffees.coffees
 
 export function Checkout() {
+  const { register, handleSubmit } = useForm()
   const [counter, setCounter] = useState<number>(0)
 
+  function handleCreateNewOrder(data: any) {
+    console.log(data)
+  }
+
   return (
-    <Container>
+    <Container onSubmit={handleSubmit(handleCreateNewOrder)} action="">
+      {/* <form onSubmit={handleSubmit(handleCreateNewOrder)} action=""> */}
       <CompleteYourOrder>
         <h2>Complete your order</h2>
         <AddressForm>
@@ -45,17 +52,21 @@ export function Checkout() {
             </div>
           </div>
 
-          <form action="">
-            <input type="number" placeholder="ZIP" name="zip" />
-            <input type="text" placeholder="Street" name="street" />
-            <div id="optional" data-required="Optional">
-              <input type="text" placeholder="Complement" name="complement" />
-            </div>
-            <div>
-              <input type="number" placeholder="Number" name="number" />
-              <input type="text" placeholder="City" name="city" />
-            </div>
-          </form>
+          {/* <form onSubmit={handleSubmit(handleCreateNewOrder)} action=""> */}
+          <input type="number" placeholder="ZIP" {...register('zip')} />
+          <input type="text" placeholder="Street" {...register('street')} />
+          <div id="optional" data-required="Optional">
+            <input
+              type="text"
+              placeholder="Complement"
+              {...register('complement')}
+            />
+          </div>
+          <div>
+            <input type="number" placeholder="Number" {...register('number')} />
+            <input type="text" placeholder="City" {...register('city')} />
+          </div>
+          {/* </form> */}
         </AddressForm>
         <PaymentMethod>
           <div id="sentence">
@@ -69,11 +80,11 @@ export function Checkout() {
           </div>
 
           <div id="options">
-            <button>
+            <button type="button">
               <CreditCard size={16} color="#8047F8" />
               <p>Card</p>
             </button>
-            <button>
+            <button type="button">
               <Money size={16} color="#8047F8" />
               <p>Cash</p>
             </button>
@@ -164,6 +175,7 @@ export function Checkout() {
           <button type="submit">CONFIRM ORDER</button>
         </SelectedCoffeesCard>
       </SelectedCoffees>
+      {/* </form> */}
     </Container>
   )
 }

@@ -39,7 +39,7 @@ export function CoffeeCounterContextProvider({
 
   function handleChangeCoffeeCounter(coffee: string, change: string) {
     const coffeeIndex = coffeeCounter.findIndex((coffeeObject) => {
-      return (coffeeObject.type = coffee)
+      return coffeeObject.type === coffee
     })
 
     const newCoffeeCounter = [...coffeeCounter]
@@ -57,10 +57,10 @@ export function CoffeeCounterContextProvider({
 
   function showCoffeeNumber(coffee: string) {
     const coffeeIndex = coffeeCounter.findIndex((coffeeObject) => {
-      return (coffeeObject.type = coffee)
+      return coffeeObject.type === coffee
     })
 
-    const coffeeNumber = coffeeCounter[coffeeIndex].type
+    const coffeeNumber = coffeeCounter[coffeeIndex].number
 
     return Number(coffeeNumber)
   }
