@@ -1,5 +1,6 @@
 import { Minus, Plus, ShoppingCart } from 'phosphor-react'
 import { useContext } from 'react'
+import { CartContext } from '../../../../contexts/CoffeeCartContext'
 import { CounterContext } from '../../../../contexts/CoffeeCounterContext'
 import {
   Actions,
@@ -27,6 +28,8 @@ interface CoffeeCardProps {
 export function CoffeeCard({ name, label, imageUrl, tags }: CoffeeCardProps) {
   const { handleChangeCoffeeCounter, showCoffeeNumber } =
     useContext(CounterContext)
+
+  const { handleChangeCart } = useContext(CartContext)
 
   return (
     <Container>
@@ -58,7 +61,12 @@ export function CoffeeCard({ name, label, imageUrl, tags }: CoffeeCardProps) {
               <Plus size={14} />
             </AddCounter>
           </Counter>
-          <IconButton>
+          <IconButton
+            onClick={() => {
+              handleChangeCart(imageUrl, showCoffeeNumber(imageUrl))
+              handleChangeCoffeeCounter(imageUrl, 'reset')
+            }}
+          >
             <ShoppingCart size={21} weight="fill" />
           </IconButton>
         </Actions>

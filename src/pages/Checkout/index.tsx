@@ -20,17 +20,23 @@ import {
   SelectedCoffeesCard,
   SubtractCounter,
 } from './styles'
-// import coffees from '../../assets/coffees.json'
-import traditionalExpresso from '../../assets/coffee-expresso.svg'
-import latte from '../../assets/coffee-latte.svg'
-import { useState } from 'react'
+import coffees from '../../assets/coffees.json'
+import { useContext } from 'react'
 import { useForm } from 'react-hook-form'
+import { CartContext } from '../../contexts/CoffeeCartContext'
 
-// const coffeeList = coffees.coffees
+const coffeeList = coffees.coffees
 
 export function Checkout() {
   const { register, handleSubmit } = useForm()
-  const [counter, setCounter] = useState<number>(0)
+
+  const {
+    handleShowCart,
+    handleChangeCart,
+    handleRemoveCoffeeFromCart,
+    handleShowNumber,
+  } = useContext(CartContext)
+  const coffeeCart = handleShowCart()
 
   function handleCreateNewOrder(data: any) {
     console.log(data)
@@ -94,82 +100,76 @@ export function Checkout() {
       <SelectedCoffees>
         <h2>Selected coffees</h2>
         <SelectedCoffeesCard>
-          <SelectedCoffeeCard>
-            <div id="container">
-              <img src={traditionalExpresso} alt="" />
-              <div id="main">
-                <p id="title">Traditional Expresso</p>
-                <Actions>
-                  <Counter>
-                    <SubtractCounter
-                      onClick={() => setCounter((prevState) => prevState - 1)}
+          {coffeeCart.map((coffee) => (
+            <SelectedCoffeeCard key={coffee.type}>
+              <div id="container">
+                <img src={`../src/assets/${coffee.type}.svg`} alt="" />
+                <div id="main">
+                  <p id="title">
+                    {
+                      coffeeList[
+                        coffeeList.findIndex(
+                          (element) => element.imageUrl === coffee.type,
+                        )
+                      ].name
+                    }
+                  </p>
+                  <Actions>
+                    <Counter>
+                      <SubtractCounter
+                        onClick={() =>
+                          handleChangeCart(coffee.type, coffee.number - 1)
+                        }
+                      >
+                        <Minus size={14} />
+                      </SubtractCounter>
+                      <p>{coffee.number}</p>
+                      <AddCounter
+                        onClick={() =>
+                          handleChangeCart(coffee.type, coffee.number + 1)
+                        }
+                      >
+                        <Plus size={14} />
+                      </AddCounter>
+                    </Counter>
+                    <button
+                      id="remove"
+                      onClick={() => handleRemoveCoffeeFromCart(coffee.type)}
                     >
-                      <Minus size={14} />
-                    </SubtractCounter>
-                    <p>{counter >= 0 ? counter : 0}</p>
-                    <AddCounter
-                      onClick={() => setCounter((prevState) => prevState + 1)}
-                    >
-                      <Plus size={14} />
-                    </AddCounter>
-                  </Counter>
-                  <button id="remove">
-                    <Trash size={16} />
-                    <p>REMOVE</p>
-                  </button>
-                </Actions>
+                      <Trash size={16} />
+                      <p>REMOVE</p>
+                    </button>
+                  </Actions>
+                </div>
               </div>
-            </div>
 
-            <div id="price">
-              <p>1,99€</p>
-            </div>
-          </SelectedCoffeeCard>
-          <div id="divider" />
-          <SelectedCoffeeCard>
-            <div id="container">
-              <img src={latte} alt="" />
-              <div id="main">
-                <p id="title">Latte</p>
-                <Actions>
-                  <Counter>
-                    <SubtractCounter
-                      onClick={() => setCounter((prevState) => prevState - 1)}
-                    >
-                      <Minus size={14} />
-                    </SubtractCounter>
-                    <p>{counter >= 0 ? counter : 0}</p>
-                    <AddCounter
-                      onClick={() => setCounter((prevState) => prevState + 1)}
-                    >
-                      <Plus size={14} />
-                    </AddCounter>
-                  </Counter>
-                  <button id="remove">
-                    <Trash size={16} />
-                    <p>REMOVE</p>
-                  </button>
-                </Actions>
+              <div id="price">
+                <p>{`${coffee.number * 1.99}€`}</p>
               </div>
-            </div>
-
-            <div id="price">
-              <p>1,99€</p>
-            </div>
-          </SelectedCoffeeCard>
+            </SelectedCoffeeCard>
+          ))}
           <div id="divider" />
+
           <div id="detailedInfo">
             <div id="totalItems">
               <p>Total items</p>
-              <p>5,87€</p>
+              <p>
+                {handleShowNumber() === 0
+                  ? '0,00€'
+                  : `${handleShowNumber() * 1.99}€`}
+              </p>
             </div>
             <div id="delivery">
               <p>Delivery</p>
-              <p>0,77€</p>
+              <p>{handleShowNumber() === 0 ? '0,00€' : '0,77€'}</p>
             </div>
             <div id="total">
               <p>Total</p>
-              <p>6,56€</p>
+              <p>
+                {handleShowNumber() === 0
+                  ? '0,00€'
+                  : `${handleShowNumber() * 1.99 + 0.77}€`}
+              </p>
             </div>
           </div>
           <button type="submit">CONFIRM ORDER</button>

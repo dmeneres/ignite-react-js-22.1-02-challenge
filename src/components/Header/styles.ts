@@ -39,7 +39,7 @@ export const Locale = styled.div`
   }
 `
 
-export const ShopCart = styled.div`
+export const ShopCart = styled.a`
   display: flex;
   align-items: center;
 
@@ -49,4 +49,20 @@ export const ShopCart = styled.div`
 
   background-color: ${(props) => props.theme['yellow-light']};
   color: ${(props) => props.theme['yellow-dark']};
+`
+
+export const CartNumber = styled.p`
+  background-color: ${(props) => props.theme['yellow-dark']};
+  color: ${(props) => props.theme.white};
+  border-radius: 1000px;
+  width: 20px;
+  height: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+  right: 21px;
+  top: -8px;
 `

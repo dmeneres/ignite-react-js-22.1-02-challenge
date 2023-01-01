@@ -50,6 +50,8 @@ export function CoffeeCounterContextProvider({
       if (newCoffeeCounter[coffeeIndex].number > 0) {
         newCoffeeCounter[coffeeIndex].number--
       }
+    } else if (change === 'reset') {
+      newCoffeeCounter[coffeeIndex].number = 0
     }
 
     setCoffeeCounter(newCoffeeCounter)

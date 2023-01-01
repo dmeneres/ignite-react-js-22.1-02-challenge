@@ -9,6 +9,7 @@ interface CartContextType {
   handleChangeCart: (coffee: string, quantity: number) => void
   handleShowCart: () => Cart[]
   handleShowNumber: () => number
+  handleRemoveCoffeeFromCart: (coffee: string) => void
 }
 
 export const CartContext = createContext({} as CartContextType)
@@ -25,7 +26,7 @@ export function CoffeeCartContext({
     { type: 'coffee-arab', number: 0 },
     { type: 'coffee-capuccino', number: 0 },
     { type: 'coffee-creamed-expresso', number: 0 },
-    { type: 'coffee-cuban', number: 2 },
+    { type: 'coffee-cuban', number: 0 },
     { type: 'coffee-hawaiian', number: 0 },
     { type: 'coffee-hot-chocolate', number: 0 },
     { type: 'coffee-iced-expresso', number: 0 },
@@ -37,6 +38,18 @@ export function CoffeeCartContext({
     { type: 'coffee-expresso', number: 0 },
   ])
 
+  function handleRemoveCoffeeFromCart(coffee: string) {
+    const newCart = [...cart]
+
+    const coffeeIndex = cart.findIndex((coffeeObject) => {
+      return coffeeObject.type === coffee
+    })
+
+    newCart[coffeeIndex].number = 0
+
+    setCart(newCart)
+  }
+
   function handleChangeCart(coffee: string, quantity: number) {
     const coffeeIndex = cart.findIndex((coffeeObject) => {
       return coffeeObject.type === coffee
@@ -45,7 +58,7 @@ export function CoffeeCartContext({
     const newCart = [...cart]
 
     if (quantity !== 0) {
-      newCart[coffeeIndex].number += quantity
+      newCart[coffeeIndex].number = quantity
     }
 
     setCart(newCart)
@@ -71,6 +84,7 @@ export function CoffeeCartContext({
         handleChangeCart,
         handleShowCart,
         handleShowNumber,
+        handleRemoveCoffeeFromCart,
       }}
     >
       {children}
