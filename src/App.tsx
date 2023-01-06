@@ -9,13 +9,13 @@ import { CoffeeCartContext } from './contexts/CoffeeCartContext'
 function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
-      <BrowserRouter>
-        <CoffeeCartContext>
-          <CoffeeCounterContextProvider>
+      <CoffeeCartContext>
+        <CoffeeCounterContextProvider>
+          <BrowserRouter>
             <Router />
-          </CoffeeCounterContextProvider>
-        </CoffeeCartContext>
-      </BrowserRouter>
+          </BrowserRouter>
+        </CoffeeCounterContextProvider>
+      </CoffeeCartContext>
       <GlobalStyle />
     </ThemeProvider>
   )

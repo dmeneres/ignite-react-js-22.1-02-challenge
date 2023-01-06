@@ -1,7 +1,6 @@
 import { Minus, Plus, ShoppingCart } from 'phosphor-react'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { CartContext } from '../../../../contexts/CoffeeCartContext'
-import { CounterContext } from '../../../../contexts/CoffeeCounterContext'
 import {
   Actions,
   AddCounter,
@@ -26,10 +25,19 @@ interface CoffeeCardProps {
 }
 
 export function CoffeeCard({ name, label, imageUrl, tags }: CoffeeCardProps) {
-  const { handleChangeCoffeeCounter, showCoffeeNumber } =
-    useContext(CounterContext)
-
   const { handleChangeCart } = useContext(CartContext)
+
+  const [counter, setCounter] = useState(0)
+
+  function addOne() {
+    setCounter((prevState) => prevState + 1)
+  }
+
+  function subtractOne() {
+    if (counter !== 0) {
+      setCounter((prevState) => prevState - 1)
+    }
+  }
 
   return (
     <Container>
@@ -49,22 +57,17 @@ export function CoffeeCard({ name, label, imageUrl, tags }: CoffeeCardProps) {
         </Price>
         <Actions>
           <Counter>
-            <SubtractCounter
-              onClick={() => handleChangeCoffeeCounter(imageUrl, 'decrease')}
-            >
+            <SubtractCounter onClick={subtractOne}>
               <Minus size={14} />
             </SubtractCounter>
-            <p>{showCoffeeNumber(imageUrl)}</p>
-            <AddCounter
-              onClick={() => handleChangeCoffeeCounter(imageUrl, 'increase')}
-            >
+            <p>{counter}</p>
+            <AddCounter onClick={addOne}>
               <Plus size={14} />
             </AddCounter>
           </Counter>
           <IconButton
             onClick={() => {
-              handleChangeCart(imageUrl, showCoffeeNumber(imageUrl))
-              handleChangeCoffeeCounter(imageUrl, 'reset')
+              handleChangeCart(imageUrl, counter)
             }}
           >
             <ShoppingCart size={21} weight="fill" />
