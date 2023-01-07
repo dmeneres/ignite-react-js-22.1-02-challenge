@@ -15,6 +15,18 @@ export const HeaderContainer = styled.header`
 export const Cart = styled.div`
   display: flex;
   gap: 12px;
+
+  div + a {
+    display: flex;
+    align-items: center;
+
+    border-radius: 6px;
+    width: auto;
+    padding: 8px;
+
+    background-color: ${(props) => props.theme['yellow-light']};
+    color: ${(props) => props.theme['yellow-dark']};
+  }
 `
 
 export const Locale = styled.div`

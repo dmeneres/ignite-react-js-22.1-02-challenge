@@ -21,14 +21,24 @@ import {
   SubtractCounter,
 } from './styles'
 import coffees from '../../assets/coffees.json'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { CartContext } from '../../contexts/CoffeeCartContext'
+import { OrderInfoContext } from '../../contexts/OrderInfoContext'
 
 const coffeeList = coffees.coffees
 
+interface DataType {
+  zip: number
+  street: string
+  complement: string
+  number: number
+  city: string
+}
+
 export function Checkout() {
   const { register, handleSubmit } = useForm()
+  const [payment, setPayment] = useState('card')
 
   const {
     handleShowCart,
@@ -38,8 +48,23 @@ export function Checkout() {
   } = useContext(CartContext)
   const coffeeCart = handleShowCart()
 
-  function handleCreateNewOrder(data: any) {
-    console.log(data)
+  const { changeOrderInfo } = useContext(OrderInfoContext)
+
+  function handleCreateNewOrder({
+    zip,
+    street,
+    complement,
+    number,
+    city,
+  }: DataType) {
+    changeOrderInfo({
+      zip,
+      street,
+      complement,
+      number,
+      city,
+      payment,
+    })
   }
 
   return (
@@ -58,21 +83,25 @@ export function Checkout() {
             </div>
           </div>
 
-          {/* <form onSubmit={handleSubmit(handleCreateNewOrder)} action=""> */}
-          <input type="number" placeholder="ZIP" {...register('zip')} />
-          <input type="text" placeholder="Street" {...register('street')} />
-          <div id="optional" data-required="Optional">
-            <input
-              type="text"
-              placeholder="Complement"
-              {...register('complement')}
-            />
-          </div>
-          <div>
-            <input type="number" placeholder="Number" {...register('number')} />
-            <input type="text" placeholder="City" {...register('city')} />
-          </div>
-          {/* </form> */}
+          <form onSubmit={handleSubmit(handleCreateNewOrder)} action="">
+            <input type="number" placeholder="ZIP" {...register('zip')} />
+            <input type="text" placeholder="Street" {...register('street')} />
+            <div id="optional" data-required="Optional">
+              <input
+                type="text"
+                placeholder="Complement"
+                {...register('complement')}
+              />
+            </div>
+            <div>
+              <input
+                type="number"
+                placeholder="Number"
+                {...register('number')}
+              />
+              <input type="text" placeholder="City" {...register('city')} />
+            </div>
+          </form>
         </AddressForm>
         <PaymentMethod>
           <div id="sentence">
@@ -86,11 +115,11 @@ export function Checkout() {
           </div>
 
           <div id="options">
-            <button type="button">
+            <button type="button" onClick={() => setPayment('card')}>
               <CreditCard size={16} color="#8047F8" />
               <p>Card</p>
             </button>
-            <button type="button">
+            <button type="button" onClick={() => setPayment('cash')}>
               <Money size={16} color="#8047F8" />
               <p>Cash</p>
             </button>

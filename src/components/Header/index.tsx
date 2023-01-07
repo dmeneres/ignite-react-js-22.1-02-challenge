@@ -1,7 +1,8 @@
 import { MapPin, ShoppingCart } from 'phosphor-react'
 import { useContext } from 'react'
+import { NavLink } from 'react-router-dom'
 import { CartContext } from '../../contexts/CoffeeCartContext'
-import { Cart, CartNumber, HeaderContainer, Locale, ShopCart } from './styles'
+import { Cart, CartNumber, HeaderContainer, Locale } from './styles'
 
 export function Header() {
   const { handleShowNumber } = useContext(CartContext)
@@ -13,9 +14,9 @@ export function Header() {
           <MapPin weight="fill" size={20} />
           <p>Porto Alegre, RS</p>
         </Locale>
-        <ShopCart href="/checkout">
+        <NavLink to="/checkout">
           <ShoppingCart size={22} />
-        </ShopCart>
+        </NavLink>
         {handleShowNumber() === 0 ? (
           ''
         ) : (

@@ -4,6 +4,7 @@ export const Container = styled.form`
   padding-top: 40px;
   display: flex;
   gap: 32px;
+  width: 100vw;
 `
 
 export const CompleteYourOrder = styled.div`

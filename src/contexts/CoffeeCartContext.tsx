@@ -54,7 +54,7 @@ export function CoffeeCartContext({
     const isCoffeeOnCart =
       cart.findIndex((coffeeObject) => {
         return coffeeObject.type === coffee
-      }) >= 1
+      }) >= 0
 
     if (isCoffeeOnCart) {
       const coffeeIndex = cart.findIndex((coffeeObject) => {

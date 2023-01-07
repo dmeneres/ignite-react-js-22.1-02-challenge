@@ -3,19 +3,19 @@ import { BrowserRouter } from 'react-router-dom'
 import { Router } from './Router'
 import { GlobalStyle } from './styles/global'
 import { defaultTheme } from './styles/themes/default'
-import { CoffeeCounterContextProvider } from './contexts/CoffeeCounterContext'
 import { CoffeeCartContext } from './contexts/CoffeeCartContext'
+import { OrderContext } from './contexts/OrderInfoContext'
 
 function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
-      <CoffeeCartContext>
-        <CoffeeCounterContextProvider>
+      <OrderContext>
+        <CoffeeCartContext>
           <BrowserRouter>
             <Router />
           </BrowserRouter>
-        </CoffeeCounterContextProvider>
-      </CoffeeCartContext>
+        </CoffeeCartContext>
+      </OrderContext>
       <GlobalStyle />
     </ThemeProvider>
   )
