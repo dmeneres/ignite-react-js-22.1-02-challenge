@@ -25,6 +25,7 @@ import { useContext, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { CartContext } from '../../contexts/CoffeeCartContext'
 import { OrderInfoContext } from '../../contexts/OrderInfoContext'
+import { NavLink } from 'react-router-dom'
 
 const coffeeList = coffees.coffees
 
@@ -38,7 +39,7 @@ interface DataType {
 
 export function Checkout() {
   const { register, handleSubmit } = useForm()
-  const [payment, setPayment] = useState('card')
+  const [payment, setPayment] = useState<'Card' | 'Cash'>('Card')
 
   const {
     handleShowCart,
@@ -65,25 +66,27 @@ export function Checkout() {
       city,
       payment,
     })
+    console.log('asdasdasdkmaslkdmaskdmlaskdmlka')
   }
 
   return (
-    <Container onSubmit={handleSubmit(handleCreateNewOrder)} action="">
+    <Container>
       {/* <form onSubmit={handleSubmit(handleCreateNewOrder)} action=""> */}
       <CompleteYourOrder>
         <h2>Complete your order</h2>
-        <AddressForm>
-          <div>
+        <form onSubmit={handleSubmit(() => handleCreateNewOrder)} action="">
+          <AddressForm>
             <div>
-              <MapPinLine size={22} />
+              <div>
+                <MapPinLine size={22} />
+              </div>
+              <div>
+                <h3>Delivery Address</h3>
+                <p>Let us know where you want to receive your order</p>
+              </div>
             </div>
-            <div>
-              <h3>Delivery Address</h3>
-              <p>Let us know where you want to receive your order</p>
-            </div>
-          </div>
 
-          <form onSubmit={handleSubmit(handleCreateNewOrder)} action="">
+            {/* <form onSubmit={handleSubmit(() => handleCreateNewOrder)} action=""> */}
             <input type="number" placeholder="ZIP" {...register('zip')} />
             <input type="text" placeholder="Street" {...register('street')} />
             <div id="optional" data-required="Optional">
@@ -101,30 +104,33 @@ export function Checkout() {
               />
               <input type="text" placeholder="City" {...register('city')} />
             </div>
-          </form>
-        </AddressForm>
-        <PaymentMethod>
-          <div id="sentence">
-            <div>
-              <CurrencyDollar size={22} />
+            {/* </form> */}
+          </AddressForm>
+          <PaymentMethod>
+            <div id="sentence">
+              <div>
+                <CurrencyDollar size={22} />
+              </div>
+              <div>
+                <h3>Payment</h3>
+                <p>
+                  Payment is made on delivery. Choose the way you want to pay
+                </p>
+              </div>
             </div>
-            <div>
-              <h3>Payment</h3>
-              <p>Payment is made on delivery. Choose the way you want to pay</p>
-            </div>
-          </div>
 
-          <div id="options">
-            <button type="button" onClick={() => setPayment('card')}>
-              <CreditCard size={16} color="#8047F8" />
-              <p>Card</p>
-            </button>
-            <button type="button" onClick={() => setPayment('cash')}>
-              <Money size={16} color="#8047F8" />
-              <p>Cash</p>
-            </button>
-          </div>
-        </PaymentMethod>
+            <div id="options">
+              <button type="button" onClick={() => setPayment('Card')}>
+                <CreditCard size={16} color="#8047F8" />
+                <p>Card</p>
+              </button>
+              <button type="button" onClick={() => setPayment('Cash')}>
+                <Money size={16} color="#8047F8" />
+                <p>Cash</p>
+              </button>
+            </div>
+          </PaymentMethod>
+        </form>
       </CompleteYourOrder>
       <SelectedCoffees>
         <h2>Selected coffees</h2>
@@ -201,7 +207,15 @@ export function Checkout() {
               </p>
             </div>
           </div>
-          <button type="submit">CONFIRM ORDER</button>
+          <NavLink to={'/success'}>
+            <button
+              type="submit"
+              id="hidden"
+              onClick={() => console.log('Clicado!!!!')}
+            >
+              CONFIRM ORDER
+            </button>
+          </NavLink>
         </SelectedCoffeesCard>
       </SelectedCoffees>
       {/* </form> */}

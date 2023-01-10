@@ -8,8 +8,12 @@ import {
 } from './styles'
 import successIllustration from '../../assets/success-illustration.svg'
 import { CurrencyDollar, MapPin, Timer } from 'phosphor-react'
+import { useContext } from 'react'
+import { OrderInfoContext } from '../../contexts/OrderInfoContext'
 
 export function Success() {
+  const { orderInfo } = useContext(OrderInfoContext)
+
   return (
     <Container>
       <Text>
@@ -25,9 +29,12 @@ export function Success() {
 
             <div id="address">
               <p>
-                Delivery on <span>Rua João Daniel Martinelli, 102</span>
+                Delivery on{' '}
+                <span>
+                  {orderInfo.street}, {orderInfo.number}
+                </span>
               </p>
-              <p>Farrapos - Porto Alegre, RS</p>
+              <p>{orderInfo.city}</p>
             </div>
           </div>
 
@@ -49,7 +56,7 @@ export function Success() {
 
             <div id="paymentText">
               <p>Payment on delivery</p>
-              <p>Card</p>
+              <p>{orderInfo.payment}</p>
             </div>
           </div>
         </div>

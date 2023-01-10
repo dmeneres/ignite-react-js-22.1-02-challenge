@@ -1,10 +1,15 @@
 import styled from 'styled-components'
 
-export const Container = styled.form`
+export const Container = styled.div`
   padding-top: 40px;
   display: flex;
   gap: 32px;
   width: 100vw;
+
+  button[id='hidden'] {
+    background: transparent;
+    border: none !important;
+  }
 `
 
 export const CompleteYourOrder = styled.div`
@@ -62,7 +67,7 @@ export const SelectedCoffees = styled.div`
     }
   }
 
-  button {
+  a {
     margin-top: 24px;
     width: 100%;
 

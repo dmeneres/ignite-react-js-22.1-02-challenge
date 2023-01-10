@@ -11,6 +11,7 @@ interface DataType {
 
 interface OrderInfoContextType {
   changeOrderInfo: (data: DataType) => Object
+  orderInfo: DataType
 }
 
 export const OrderInfoContext = createContext({} as OrderInfoContextType)
@@ -20,7 +21,14 @@ interface OrderInfoContextProviderProps {
 }
 
 export function OrderContext({ children }: OrderInfoContextProviderProps) {
-  const [orderInfo, setOrderInfo] = useState({})
+  const [orderInfo, setOrderInfo] = useState<DataType>({
+    zip: 0,
+    street: '',
+    complement: '',
+    number: 0,
+    city: '',
+    payment: 'Card',
+  })
 
   function changeOrderInfo({
     zip,
@@ -38,12 +46,12 @@ export function OrderContext({ children }: OrderInfoContextProviderProps) {
       city,
       payment,
     })
-
+    console.log('asdkjasdnjkasndkasjdnasjkdnasjkdnk')
     return orderInfo
   }
 
   return (
-    <OrderInfoContext.Provider value={{ changeOrderInfo }}>
+    <OrderInfoContext.Provider value={{ changeOrderInfo, orderInfo }}>
       {children}
     </OrderInfoContext.Provider>
   )
