@@ -14,6 +14,7 @@ import {
   CompleteYourOrder,
   Container,
   Counter,
+  InputsContainer,
   PaymentMethod,
   SelectedCoffeeCard,
   SelectedCoffees,
@@ -38,7 +39,7 @@ interface DataType {
 }
 
 export function Checkout() {
-  const { register, handleSubmit } = useForm()
+  const { register, handleSubmit } = useForm<DataType>()
   const [payment, setPayment] = useState<'Card' | 'Cash'>('Card')
 
   const {
@@ -51,14 +52,14 @@ export function Checkout() {
 
   const { changeOrderInfo } = useContext(OrderInfoContext)
 
-  function handleCreateNewOrder({
+  async function handleCreateNewOrder({
     zip,
     street,
     complement,
     number,
     city,
   }: DataType) {
-    changeOrderInfo({
+    await changeOrderInfo({
       zip,
       street,
       complement,
@@ -66,71 +67,78 @@ export function Checkout() {
       city,
       payment,
     })
-    console.log('asdasdasdkmaslkdmaskdmlaskdmlka')
+    console.log('GASDGADSHGDAHGDA')
   }
 
   return (
-    <Container>
-      {/* <form onSubmit={handleSubmit(handleCreateNewOrder)} action=""> */}
+    <Container as="form" onSubmit={handleSubmit(handleCreateNewOrder)}>
       <CompleteYourOrder>
         <h2>Complete your order</h2>
-        <form onSubmit={handleSubmit(() => handleCreateNewOrder)} action="">
-          <AddressForm>
+        <AddressForm>
+          <div>
             <div>
-              <div>
-                <MapPinLine size={22} />
-              </div>
-              <div>
-                <h3>Delivery Address</h3>
-                <p>Let us know where you want to receive your order</p>
-              </div>
-            </div>
-
-            {/* <form onSubmit={handleSubmit(() => handleCreateNewOrder)} action=""> */}
-            <input type="number" placeholder="ZIP" {...register('zip')} />
-            <input type="text" placeholder="Street" {...register('street')} />
-            <div id="optional" data-required="Optional">
-              <input
-                type="text"
-                placeholder="Complement"
-                {...register('complement')}
-              />
+              <MapPinLine size={22} />
             </div>
             <div>
-              <input
-                type="number"
-                placeholder="Number"
-                {...register('number')}
-              />
-              <input type="text" placeholder="City" {...register('city')} />
+              <h3>Delivery Address</h3>
+              <p>Let us know where you want to receive your order</p>
             </div>
-            {/* </form> */}
-          </AddressForm>
-          <PaymentMethod>
-            <div id="sentence">
-              <div>
-                <CurrencyDollar size={22} />
-              </div>
-              <div>
-                <h3>Payment</h3>
-                <p>
-                  Payment is made on delivery. Choose the way you want to pay
-                </p>
-              </div>
+          </div>
+          <InputsContainer>
+            <input
+              id="zip"
+              type="number"
+              placeholder="ZIP"
+              {...register('zip')}
+            />
+            <input
+              id="street"
+              type="text"
+              placeholder="Street"
+              {...register('street')}
+            />
+            <input
+              id="complement"
+              type="text"
+              placeholder="Complement"
+              {...register('complement')}
+            />
+            <input
+              id="number"
+              type="number"
+              placeholder="Number"
+              {...register('number')}
+            />
+            <input
+              id="city"
+              type="text"
+              placeholder="City"
+              {...register('city')}
+            />
+          </InputsContainer>
+        </AddressForm>
+        <PaymentMethod>
+          <div id="sentence">
+            <div>
+              <CurrencyDollar size={22} />
             </div>
+            <div>
+              <h3>Payment</h3>
+              <p>Payment is made on delivery. Choose the way you want to pay</p>
+            </div>
+          </div>
 
-            <div id="options">
-              <button type="button" onClick={() => setPayment('Card')}>
-                <CreditCard size={16} color="#8047F8" />
-                <p>Card</p>
-              </button>
-              <button type="button" onClick={() => setPayment('Cash')}>
-                <Money size={16} color="#8047F8" />
-                <p>Cash</p>
-              </button>
-            </div>
-          </PaymentMethod>
-        </form>
+          <div id="options">
+            <button type="button" onClick={() => setPayment('Card')}>
+              <CreditCard size={16} color="#8047F8" />
+              <p>Card</p>
+            </button>
+            <button type="button" onClick={() => setPayment('Cash')}>
+              <Money size={16} color="#8047F8" />
+              <p>Cash</p>
+            </button>
+          </div>
+        </PaymentMethod>
       </CompleteYourOrder>
       <SelectedCoffees>
         <h2>Selected coffees</h2>
@@ -208,17 +216,10 @@ export function Checkout() {
             </div>
           </div>
           <NavLink to={'/success'}>
-            <button
-              type="submit"
-              id="hidden"
-              onClick={() => console.log('Clicado!!!!')}
-            >
-              CONFIRM ORDER
-            </button>
+            <button type="submit">CONFIRM ORDER</button>
           </NavLink>
         </SelectedCoffeesCard>
       </SelectedCoffees>
-      {/* </form> */}
     </Container>
   )
 }

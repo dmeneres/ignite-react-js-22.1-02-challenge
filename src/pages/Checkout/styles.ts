@@ -6,10 +6,10 @@ export const Container = styled.div`
   gap: 32px;
   width: 100vw;
 
-  button[id='hidden'] {
+  /* button[id='hidden'] {
     background: transparent;
     border: none !important;
-  }
+  } */
 `
 
 export const CompleteYourOrder = styled.div`
@@ -87,9 +87,32 @@ export const SelectedCoffees = styled.div`
     font-weight: 700;
     font-size: 14px;
     line-height: 160%;
+    text-decoration: none;
   }
 
-  button:hover {
+  button {
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    border: none;
+    border-radius: 6px;
+    background-color: transparent;
+
+    color: ${(props) => props.theme.white};
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 160%;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  a:hover {
     background-color: ${(props) => props.theme['yellow-dark']};
     transition: 0.2s;
     cursor: pointer;
@@ -132,7 +155,7 @@ export const AddressForm = styled.div`
   margin-bottom: 12px;
 
   width: 640px;
-  height: 372px;
+  height: auto;
 
   background-color: ${(props) => props.theme['base-card']};
   border-radius: 6px;
@@ -544,5 +567,58 @@ export const SubtractCounter = styled.div`
   :hover {
     color: ${(props) => props.theme['purple-dark']};
     transition: 0.2s;
+  }
+`
+
+export const InputsContainer = styled.div`
+  display: grid !important;
+  grid-template-areas:
+    'zip street street'
+    'complement complement complement'
+    'number city city';
+
+  grid-template-columns: 1fr 1fr 1fr;
+
+  width: 100%;
+
+  input[id='zip'] {
+    grid-area: zip;
+  }
+
+  input[id='street'] {
+    grid-area: street;
+  }
+
+  input[id='complement'] {
+    grid-area: complement;
+  }
+
+  input[id='number'] {
+    grid-area: number;
+  }
+
+  input[id='city'] {
+    grid-area: city;
+  }
+
+  gap: 16px 12px;
+
+  input {
+    border: 1px solid ${(props) => props.theme['base-button']};
+    background-color: ${(props) => props.theme['base-input']};
+    color: ${(props) => props.theme['base-label']};
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px;
+    border-radius: 4px;
+
+    /* width: 100%; */
   }
 `
